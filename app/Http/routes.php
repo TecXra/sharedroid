@@ -37,5 +37,7 @@ Route::post('tokenupdate','ShareController@tokenUpdate');
 Route::post('SecondaryIdUpdate','ShareController@SecondaryIdUpdate');
 
 
+Route::post('SendMsgToPrimary','ShareController@SendMsgToPrimary');
+
 
 

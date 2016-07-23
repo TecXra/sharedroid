@@ -185,6 +185,93 @@ public function SecondaryIdUpdate(Request $request)
 
 
 
+public function SendMsgToPrimary(Requests\MessageRequest $request)
+{
+		
+
+		$user = User::find($request->primary_id);	
+		$token = $user->token;
+
+
+		
+   		$headers = ['Content-Type' => 'application/json',
+       'Authorization' => 'key=AIzaSyA3LJ5StdqrfmIkJW44cu3v5SAFE8JkJSE'
+    ];
+       $client = new Client();
+
+	   $r = $client->request('POST', 'https://gcm-http.googleapis.com/gcm/send',[
+         'headers' => $headers ,
+  		 'json' =>     [    'to'     => $token,
+         'data'     =>     [    'messageBody' => $request->message,
+                               'sendTo' => $request->to_number
+                               ]
+              ]
+	]);
+
+
+	   	$Conversation=Message::Create($request->all());
+	   	$Conversation->check='s';
+		$Conversation->save();
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+	public function storesendconversation(Requests\ContactRequest $request)
+	{
+		$user = User::find(1);	
+
+		$token = $user->token;
+   		$headers = ['Content-Type' => 'application/json',
+       'Authorization' => 'key=AIzaSyA3LJ5StdqrfmIkJW44cu3v5SAFE8JkJSE'
+   ];
+
+
+       $client = new Client();
+
+   $r = $client->request('POST', 'https://gcm-http.googleapis.com/gcm/send',[
+         'headers' => $headers ,
+  'json' =>     [    'to'     => $token,
+
+                  'data'     =>     [    'messageBody' => $request->message,
+                               'sendTo' => $request->phone_number
+                               ]
+              ]
+]);
+
+	//	dd($request);
+
+
+//		$Conversation=Conversation::Create($request->all());
+	//	$Contacts =Contact::Create($request->all());
+	//	return view('pages.composer',compact('Contacts','Conversation'));
+	
+
+
+
+
+		$Conversation=Conversation::Create($request->all());
+		$Conversation->user_id=$user->id;
+		$Conversation->save();
+		
+		$composer = 'composer/' .$Conversation->user_id . '/' .  $Conversation->phone_number ;
+
+
+
+		return redirect($composer);
+	}
+
+
 
 
 
