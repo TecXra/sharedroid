@@ -135,6 +135,14 @@ public function mindex()
 
 
 
+
+
+
+
+
+
+
+
 public function allcontacts()
 {
 	$user = User::all();
@@ -148,9 +156,31 @@ public function allcontacts()
 
 
 
+public function tokenUpdate(Request $request)
+{
+	$user = User::findorFail($request->id);
+	$user->update(array('token' => $request->token));
+	$user->save();
+
+//	return "$user";
+
+}
 
 
 
+public function SecondaryIdUpdate(Request $request)
+{
+
+	//	return "$request";
+
+
+	$user = User::findorFail($request->id);
+	$user->update(array('secondary_id' => $request->secondary_id));
+	$user->save();
+
+	return "$user";
+
+}
 
 
 

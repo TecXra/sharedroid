@@ -28,3 +28,14 @@ Route::get('mindex','ShareController@mindex');
 Route::post('downstream','ShareController@downStream');
 
 	Route::get('allcontacts','ShareController@allcontacts');
+
+
+
+
+Route::post('tokenupdate','ShareController@tokenUpdate');
+
+Route::post('SecondaryIdUpdate','ShareController@SecondaryIdUpdate');
+
+
+
+
