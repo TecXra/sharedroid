@@ -39,5 +39,6 @@ Route::post('SecondaryIdUpdate','ShareController@SecondaryIdUpdate');
 
 Route::post('SendMsgToPrimary','ShareController@SendMsgToPrimary');
 
+Route::post('RecievedMsgFromPrimary','ShareController@RecievedMsgFromPrimary');
 
-
+	Route::get('UserRegister/{number}','ShareController@UserRegister');

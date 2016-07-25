@@ -12,7 +12,7 @@ class Message extends Model
 
 
 
-public function sauser()
+public function user()
     {
         return $this->belongsTo('App\User');
 
